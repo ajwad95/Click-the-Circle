@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Box Game</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #282c34;
+        }
+        .box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #61dafb;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .scoreboard {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <div class="scoreboard" id="scoreBoard">Score: 0</div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('gameContainer');
+        const scoreBoard = document.getElementById('scoreBoard');
+        let score = 0;
+
+        // Create the box element
+        const box = document.createElement('div');
+        box.classList.add('box');
+        gameContainer.appendChild(box);
+
+        // Function to move the box to a random position
+        function moveBox() {
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            box.style.left = `${x}px`;
+            box.style.top = `${y}px`;
+        }
+
+        // Update score and move the box when clicked
+        box.addEventListener('click', () => {
+            score++;
+            scoreBoard.textContent = `Score: ${score}`;
+            moveBox();
+        });
+
+        // Initialize game
+        moveBox();
+    </script>
+</body>
+</html>
